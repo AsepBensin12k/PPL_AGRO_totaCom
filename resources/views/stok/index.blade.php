@@ -35,8 +35,8 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{ route('stok.edit', $produk->id) }}">Edit</a> |
-                    <form action="{{ route('stok.destroy', $produk->id) }}" method="POST" style="display:inline;">
+                    <a href="{{ route('stok.edit', $produk->id_produk) }}">Edit</a>
+                    <form action="{{ route('stok.destroy', $produk->id_produk) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" onclick="return confirm('Yakin ingin hapus?')">Hapus</button>
