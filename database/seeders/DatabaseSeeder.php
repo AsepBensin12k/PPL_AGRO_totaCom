@@ -18,5 +18,7 @@ class DatabaseSeeder extends Seeder
             ProdukSeeder::class, // panggil seeder yang kamu buat
         ]);
 
+
+        $this->call(AkunSeeder::class);
     }
 }
