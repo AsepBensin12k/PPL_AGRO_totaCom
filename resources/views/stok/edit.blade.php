@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>Edit Produk</h1>
-    <form action="{{ route('stok.update', $produk->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('stok.update', $produk->id_produk) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 

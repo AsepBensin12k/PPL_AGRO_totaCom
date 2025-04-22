@@ -10,8 +10,8 @@ class StokController extends Controller
 {
     public function index()
     {
-        $produks = Produk::all();
-        return view('stok.index', compact('produks'));
+        $produks = Produk::all();  // Mengambil semua data produk
+        return view('stok.index', compact('produks'));  // Mengirim variabel 'produks' ke view
     }
 
     public function create()
@@ -21,7 +21,7 @@ class StokController extends Controller
 
     public function store(Request $request)
     {
-        Log::info('Semua file dari form:', $request->allFiles()); // tambahkan ini dulu
+        Log::info('Semua file dari form:', $request->allFiles());
 
         $request->validate([
             'nama_produk' => 'required',
@@ -46,7 +46,7 @@ class StokController extends Controller
 
     public function edit($id)
     {
-        $produk = Produk::findOrFail($id);
+        $produk = Produk::findOrFail($id); // Akan mencari berdasarkan 'id_produk' karena sudah didefinisikan di model
         return view('stok.edit', compact('produk'));
     }
 
@@ -78,4 +78,5 @@ class StokController extends Controller
 
         return redirect()->route('stok.index')->with('success', 'Produk berhasil dihapus');
     }
+
 }
