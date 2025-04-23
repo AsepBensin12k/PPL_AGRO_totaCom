@@ -3,38 +3,37 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
-use App\Models\Akun;
+use Illuminate\Support\Facades\DB;
 
 class AkunSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-
-        if (!Akun::where('username', 'admin')->exists()) {
-            Akun::create([
-                'username' => 'admin',
-                'password' => Hash::make('adminpassword'),
-                'nama' => 'Admin User',
+        DB::table('akun')->insert([
+            [
                 'email' => 'admin@example.com',
-                'no_hp' => '081234567890',
                 'id_role' => 1,
-            ]);
-        }
-
-        // Menambahkan akun user jika belum ada
-        if (!Akun::where('username', 'user')->exists()) {
-            Akun::create([
-                'username' => 'user',
-                'password' => Hash::make('userpassword'),
-                'nama' => 'User',
-                'email' => 'user@example.com',
+                'nama' => 'Admin User',
+                'password' => bcrypt('admin01'),
+                'username' => 'admin01',
                 'no_hp' => '081234567890',
+            ],
+            [
+                'email' => 'customer@example.com',
                 'id_role' => 2,
-            ]);
-        }
+                'nama' => 'Customer User',
+                'password' => bcrypt('customer01'),
+                'username' => 'customer01',
+                'no_hp' => '082345678901',
+            ],
+            [
+                'email' => 'staff@example.com',
+                'id_role' => 2,
+                'nama' => 'Staff User',
+                'password' => bcrypt('staff01'),
+                'username' => 'staff01',
+                'no_hp' => '083456789012',
+            ],
+        ]);
     }
 }

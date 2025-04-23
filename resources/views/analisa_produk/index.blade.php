@@ -32,9 +32,9 @@
         <div class="subtext">Analisa berdasarkan data pesanan yang telah selesai</div>
 
         @if($produkTerlaris->isEmpty())
-        <div class="alert alert-info text-center">
-            Belum ada data penjualan bulan ini.
-        </div>
+            <div class="alert alert-info text-center">
+                Belum ada data penjualan bulan ini.
+            </div>
         @else
         <div class="card p-4">
             <table class="table table-hover">

@@ -3,26 +3,41 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Produk;
-
+use Illuminate\Support\Facades\DB;
 
 class ProdukSeeder extends Seeder
 {
-
-    public function run(): void
+    public function run()
     {
-        Produk::create([
-            'nama_produk' => 'apel',
-            'harga' => 10000,
-            'stok' => 50,
-            'gambar' => null
-        ]);
-
-        Produk::create([
-            'nama_produk' => 'Markisa',
-            'harga' => 20000,
-            'stok' => 30,
-            'gambar' => null
+        DB::table('produk')->insert([
+            [
+                'nama_produk' => 'Pupuk Sapi',
+                'gambar' => 'laptop_hp.jpg',
+                'harga' => 7000000,
+                'stok' => 10,
+                'id_jenis' => 1,
+            ],
+            [
+                'nama_produk' => 'Bibit jagung',
+                'gambar' => 'tshirt.jpg',
+                'harga' => 150000,
+                'stok' => 20,
+                'id_jenis' => 3,
+            ],
+            [
+                'nama_produk' => 'Pestisida',
+                'gambar' => '',
+                'harga' => 50000,
+                'stok' => 50,
+                'id_jenis' => 2,
+            ],
+            [
+                'nama_produk' => 'Pupuk kompos',
+                'gambar' => '',
+                'harga' => 900000,
+                'stok' => 5,
+                'id_jenis' => 1,
+            ],
         ]);
     }
 }
