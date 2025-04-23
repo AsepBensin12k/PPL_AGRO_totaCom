@@ -31,9 +31,6 @@ class AnalisaProdukController extends Controller
         ->limit(10)
         ->get();
 
-
-
-
             return view('analisa_produk.index', compact('produkTerlaris'));
 
     }
