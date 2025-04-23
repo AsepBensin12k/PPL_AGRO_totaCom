@@ -15,6 +15,7 @@
         <thead>
             <tr>
                 <th>Nama Produk</th>
+                <th>Jenis Produk</th> <!-- Menambahkan kolom Jenis Produk -->
                 <th>Harga</th>
                 <th>Stok</th>
                 <th>Gambar</th>
@@ -25,6 +26,7 @@
             @foreach($produks as $produk)
             <tr>
                 <td>{{ $produk->nama_produk }}</td>
+                <td>{{ $produk->jenis->nama_jenis ?? 'Tidak diketahui' }}</td> <!-- Menampilkan jenis produk -->
                 <td>{{ $produk->harga }}</td>
                 <td>{{ $produk->stok }}</td>
                 <td>
