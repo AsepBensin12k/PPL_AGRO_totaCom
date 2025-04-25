@@ -15,6 +15,7 @@ class CreateAkunTable extends Migration
             $table->string('nama');
             $table->string('email')->unique();
             $table->string('no_hp')->unique();
+            $table->string('alamat');
             $table->unsignedBigInteger('id_role');
             $table->foreign('id_role')->references('id_role')->on('roles')->onDelete('cascade');
             $table->timestamps();
