@@ -9,10 +9,22 @@ use App\Models\Jenis;
 
 class StokController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Memuat produk beserta jenis produk menggunakan eager loading
-        $produks = Produk::with('jenis')->get();
+
+        $query = Produk::with('jenis');
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+
+            $query->where('nama_produk', 'like', "%{$search}%")
+                  ->orWhereHas('jenis', function ($q) use ($search) {
+                      $q->where('nama_jenis', 'like', "%{$search}%");
+                  });
+        }
+
+        $produks = $query->get();
+
         return view('stok.index', compact('produks'));
     }
 
