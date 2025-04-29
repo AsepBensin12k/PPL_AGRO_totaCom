@@ -9,7 +9,7 @@ class RiwayatTransaksi extends Model
 {
     use HasFactory;
 
-    protected $table = 'riwayat_transaksi';
+    protected $table = 'riwayat_transaksies';
     protected $primaryKey = 'id_riwayat';
     public $timestamps = false;
 

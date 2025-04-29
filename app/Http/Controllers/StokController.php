@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Produk;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Jenis;
 
 class StokController extends Controller
@@ -40,10 +41,10 @@ class StokController extends Controller
         Log::info('Semua file dari form:', $request->allFiles());
 
         $request->validate([
-            'nama_produk' => 'required|unique:produk,nama_produk',
+            'nama_produk' => 'required|unique:produks,nama_produk',
             'stok' => 'required|integer',
             'harga' => 'required|integer',
-            'id_jenis' => 'required|exists:jenis,id_jenis',
+            'id_jenis' => 'required|exists:jenises,id_jenis',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
@@ -65,33 +66,47 @@ class StokController extends Controller
     public function edit($id)
     {
         $produk = Produk::findOrFail($id);
-        return view('stok.edit', compact('produk'));
+        $jenisProduks = Jenis::all();
+        return view('stok.edit', compact('produk', 'jenisProduks'));
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nama_produk' => 'nullable|unique:produk,nama_produk,' . $id . ',id_produk',
-            'stok' => 'nullable|integer',
-            'harga' => 'nullable|integer',
+        // Validasi
+        $validated = $request->validate([
+            'nama_produk' => 'required|unique:produks,nama_produk,' . $id . ',id_produk',
+            'stok' => 'required|integer|min:0',
+            'harga' => 'required|numeric|min:0',
+            'id_jenis' => 'required|exists:jenises,id_jenis',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'id_jenis' => 'required|exists:jenis,id_jenis'
+            'remove_image' => 'nullable|boolean'
         ]);
 
-        $produk = Produk::findOrFail($id); // Cari produk berdasarkan ID
+        $produk = Produk::findOrFail($id);
+        $data = $request->only(['nama_produk', 'harga', 'stok', 'id_jenis']);
 
-        $data = $request->only(['nama_produk', 'harga', 'stok', 'id_jenis']); // Ambil hanya data yang relevan
-
-        // Jika gambar di-upload, simpan dan update path-nya
+        // Handle gambar
         if ($request->hasFile('gambar')) {
-            $gambarPath = $request->file('gambar')->store('produk_gambar', 'public');
-            $data['gambar'] = $gambarPath;
+            // Hapus gambar lama jika ada
+            if ($produk->gambar) {
+                Storage::disk('public')->delete($produk->gambar);
+            }
+
+            // Simpan gambar baru
+            $data['gambar'] = $request->file('gambar')->store('produk_gambar', 'public');
+        }
+        // Handle penghapusan gambar
+        elseif ($request->input('remove_image')) {
+            if ($produk->gambar) {
+                Storage::disk('public')->delete($produk->gambar);
+            }
+            $data['gambar'] = null;
         }
 
-        // Update produk dengan data yang diubah
         $produk->update($data);
 
-        return redirect()->route('stok.index')->with('success', 'Produk berhasil diperbarui!');
+        return redirect()->route('stok.index')
+                       ->with('success', 'Produk berhasil diperbarui!');
     }
 
     public function destroy($id)
