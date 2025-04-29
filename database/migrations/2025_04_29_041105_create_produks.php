@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('produks', function (Blueprint $table) {
             $table->id('id_produk');
             $table->string('nama_produk')->unique();
-            $table->string('gambar');
-            $table->decimal('harga', 10, 2);
+            $table->string('gambar')->nullable();
+            $table->decimal('harga', 10);
             $table->integer('stok');
             $table->unsignedBigInteger('id_jenis');
             $table->foreign('id_jenis')->references('id_jenis')->on('jenises')->onDelete('cascade');

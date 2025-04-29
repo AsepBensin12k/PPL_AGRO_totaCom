@@ -37,8 +37,12 @@
         <input type="file" name="gambar"><br><br>
 
         @if($produk->gambar)
-            <img src="{{ asset('storage/'.$produk->gambar) }}" width="100"><br><br>
+            <img src="{{ asset('storage/'.$produk->gambar) }}" width="100"><br>
+            <label>
+                <input type="checkbox" name="remove_image" value="1"> Hapus gambar ini
+            </label><br><br>
         @endif
+
 
         <button type="submit">Update</button>
     </form>

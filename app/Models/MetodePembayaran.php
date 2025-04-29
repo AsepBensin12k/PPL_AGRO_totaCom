@@ -9,7 +9,7 @@ class MetodePembayaran extends Model
 {
     use HasFactory;
 
-    protected $table = 'metode_pembayaran';
+    protected $table = 'metode_pembayarans';
     protected $primaryKey = 'id_metode';
     public $timestamps = true;
 

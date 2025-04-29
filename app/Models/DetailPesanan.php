@@ -9,7 +9,7 @@ class DetailPesanan extends Model
 {
     use HasFactory;
 
-    protected $table = 'detail_pesanan';
+    protected $table = 'detail_pesanans';
     protected $primaryKey = 'id_detail';
     public $timestamps = true;
 
