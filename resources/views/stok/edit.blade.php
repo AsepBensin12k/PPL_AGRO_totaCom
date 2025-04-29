@@ -5,6 +5,11 @@
 </head>
 <body>
     <h1>Edit Produk</h1>
+
+    @error('nama_produk')
+    <div class="text-red-500">{{ $message }}</div>
+    @enderror
+
     <form action="{{ route('stok.update', $produk->id_produk) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')

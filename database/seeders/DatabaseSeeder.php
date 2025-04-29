@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // Memanggil semua seeder dengan urutan yang benar
+
         $this->call([
             // 1. Seeder untuk role
             RolesSeeder::class,

@@ -10,9 +10,21 @@ class DetailPesananSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('detail_pesanan')->insert([
+        DB::table('detail_pesanans')->insert([
             [
                 'id_pesanan' => 1,
+            ],
+            [
+                'id_pesanan' => 2,
+            ],
+            [
+                'id_pesanan' => 3,
+            ],
+            [
+                'id_pesanan' => 4,
+            ],
+            [
+                'id_pesanan' => 5,
             ],
         ]);
     }
