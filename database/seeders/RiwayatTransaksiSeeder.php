@@ -9,9 +9,21 @@ class RiwayatTransaksiSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('riwayat_transaksi')->insert([
+        DB::table('riwayat_transaksies')->insert([
             [
                 'id_detail' => 1,
+            ],
+            [
+                'id_detail' => 2,
+            ],
+            [
+                'id_detail' => 3,
+            ],
+            [
+                'id_detail' => 4,
+            ],
+            [
+                'id_detail' => 5,
             ],
         ]);
     }

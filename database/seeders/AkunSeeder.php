@@ -9,7 +9,7 @@ class AkunSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('akun')->insert([
+        DB::table('akuns')->insert([
             [
                 'email' => 'admin@example.com',
                 'id_role' => 1,

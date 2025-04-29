@@ -9,7 +9,7 @@ class JenisSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('jenis')->insert([
+        DB::table('jenises')->insert([
             ['nama_jenis' => 'Pupuk'],
             ['nama_jenis' => 'Pestisida'],
             ['nama_jenis' => 'Benih'],
