@@ -13,20 +13,20 @@ class AnalisaProdukController extends Controller
         $bulanIni = Carbon::now()->format('m');
         $tahunIni = Carbon::now()->format('Y');
 
-        $produkTerlaris = DB::table('detail_pesanan')
-        ->join('pesanan', 'detail_pesanan.id_pesanan', '=', 'pesanan.id_pesanan')
-        ->join('keranjang', 'keranjang.id_keranjang', '=', 'pesanan.id_keranjang')
-        ->join('produk', 'keranjang.id_produk', '=', 'produk.id_produk')
-        ->join('status', 'pesanan.id_status', '=', 'status.id_status')
-        ->join('riwayat_transaksi', 'riwayat_transaksi.id_riwayat', '=', 'pesanan.id_pesanan')
-        ->whereMonth('pesanan.tanggal', $bulanIni)
-        ->whereYear('pesanan.tanggal', $tahunIni)
-        ->where('status.id_status', 3)
+        $produkTerlaris = DB::table('detail_pesanans')
+        ->join('pesanans', 'detail_pesanans.id_pesanan', '=', 'pesanans.id_pesanan')
+        ->join('keranjangs', 'keranjangs.id_keranjang', '=', 'pesanans.id_keranjang')
+        ->join('produks', 'keranjangs.id_produk', '=', 'produks.id_produk')
+        ->join('statuses', 'pesanans.id_status', '=', 'statuses.id_status')
+        ->join('riwayat_transaksies', 'riwayat_transaksies.id_riwayat', '=', 'pesanans.id_pesanan')
+        ->whereMonth('pesanans.tanggal', $bulanIni)
+        ->whereYear('pesanans.tanggal', $tahunIni)
+        ->where('statuses.id_status', 3)
         ->select(
-            'produk.nama_produk',
-            DB::raw('SUM(keranjang.jumlah_produk) as total_terjual')
+            'produks.nama_produk',
+            DB::raw('SUM(keranjangs.jumlah_produk) as total_terjual')
         )
-        ->groupBy('produk.id_produk', 'produk.nama_produk')
+        ->groupBy('produks.id_produk', 'produks.nama_produk')
         ->orderByDesc('total_terjual')
         ->limit(10)
         ->get();
